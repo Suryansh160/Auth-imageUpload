@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const imageSchema = new monggose.Schema(
+const imageSchema = new mongoose.Schema(
   {
     url: {
       type: String,

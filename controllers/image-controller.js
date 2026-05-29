@@ -1,7 +1,8 @@
-const Image = require('../models/Image')
+const Image = require('../models/image.js')
 const { uploadToCloudinary } = require('../helpers/cloudinary-helper')
+const fs = require('fs')
 
-const uploadImage = async (req, res) => {
+const uploadImageController = async (req, res) => {
   try {
     // check if file is missing in req object
     if (!req.file) {
@@ -24,6 +25,9 @@ const uploadImage = async (req, res) => {
 
     await newlyUploadedImage.save()
 
+    // delete the file from local storage
+    fs.unlinkSync(req.file.path)
+
     res.status(201).json({
       success: true,
       message: 'Image Uploaded successfully',
@@ -38,4 +42,4 @@ const uploadImage = async (req, res) => {
   }
 }
 
-module.exports = { uploadImage }
+module.exports = { uploadImageController }
