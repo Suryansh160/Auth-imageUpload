@@ -2,7 +2,10 @@ const express = require('express')
 const authMiddleware = require('../middleware/auth-middleware')
 const adminMiddleware = require('../middleware/admin-middleware')
 const multerMiddleware = require('../middleware/upload-middleware')
-const { uploadImageController } = require('../controllers/image-controller')
+const {
+  uploadImageController,
+  fetchImagesController
+} = require('../controllers/image-controller')
 
 const router = express.Router()
 
@@ -16,5 +19,6 @@ router.post(
 )
 
 // get all images
+router.get('/get', authMiddleware, fetchImagesController)
 
 module.exports = router
